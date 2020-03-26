@@ -65,6 +65,7 @@ aws s3 rm s3://sam.huge.head.li --recursive --profile song.li
 The SAM CLI
 
  - https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-init.html
+ - https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-command-reference.html
 
 sam package --s3-bucket sam.huge.head.li
 sam deploy
