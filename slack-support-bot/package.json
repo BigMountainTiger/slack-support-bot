@@ -1,0 +1,11 @@
+{
+  "name": "slack-support-bot",
+  "version": "1.0.0",
+  "description": "Slack support bot",
+  "author": "Song Li",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
