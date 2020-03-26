@@ -1,0 +1,70 @@
+https://medium.com/slack-developer-blog/tutorial-developing-an-action-able-app-4d5455d585b6
+
+https://api.slack.com/tutorials/slash-block-kit
+
+https://api.slack.com/tools/block-kit-builder
+
+https://app.slack.com/client/T010BMADEAY/D0102LEEJ57
+
+https://api.slack.com/dialogs
+
+
+Environment
+1. Node/NPM
+	- https://www.codeproject.com/Articles/878189/Node-js-Get-Started-and-Miscellaneous
+	- https://nodejs.org/en/
+	- Just unzip the file and add the bin directory to the PATH
+
+2. VSC
+	- https://www.codeproject.com/Articles/3804660/A-Note-on-Visual-Studio-Code
+	- https://www.codeproject.com/Articles/5257776/A-Note-on-Python-Virtualenv-VSC-Integration-and
+	- https://code.visualstudio.com/docs/setup/linux
+
+3. GIT
+	- https://www.codeproject.com/Articles/1250216/A-Note-on-GIT-Miscellaneous
+	- https://git-scm.com/
+	- https://launchpad.net/~git-core/+archive/ubuntu/ppa
+
+4. Docker
+	- https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
+	- https://docs.docker.com/install/linux/linux-postinstall/
+	- https://www.codeproject.com/Articles/1264033/A-Note-on-Docker
+	- May need to change the repository xenial
+
+5. AWS CLI V2
+	- https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
+	- https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html
+	- The AWS CLI version 2 has no dependencies on other software packages.
+	- It has a self-contained, embedded copy of all dependencies included in the installer
+	- You no longer need to install and maintain Python to use the AWS CLI
+
+6. SAM CLI
+	- https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html
+	- https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install-linux.html
+	- In Linux the recommended way of installing SAM CLI is Homebrew. When installing SAM CLI, Homebrew also installs a copy of Python 				in the /home/linuxbrew/.linuxbrew/bin/python3 directory
+
+The Credentials & AWS CLI
+
+"~/.aws/credentials" file
+
+[default]
+aws_access_key_id = default_key
+aws_secret_access_key = default_secret_key
+
+[song.li]
+aws_access_key_id = song.li_key
+aws_secret_access_key = song.li_secret_key
+
+--profile option
+
+S3 bucket - sam.huge.head.li
+
+aws s3 cp ./a-file s3://sam.huge.head.li --profile song.li
+aws s3 rm s3://sam.huge.head.li --recursive --profile song.li
+
+The SAM CLI
+
+ - https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-init.html
+
+sam package --s3-bucket sam.huge.head.li
+sam deploy
