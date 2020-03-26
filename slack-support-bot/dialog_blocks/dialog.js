@@ -78,4 +78,4 @@ let getDialog = () => {
   return dialog;
 }
 
-exports = getDialog;
+module.exports = getDialog;

@@ -43,6 +43,9 @@ Environment
 	- https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install-linux.html
 	- In Linux the recommended way of installing SAM CLI is Homebrew. When installing SAM CLI, Homebrew also installs a copy of Python 				in the /home/linuxbrew/.linuxbrew/bin/python3 directory
 
+7. NGROK
+  - https://ngrok.com/
+
 The Credentials & AWS CLI
 
 "~/.aws/credentials" file
