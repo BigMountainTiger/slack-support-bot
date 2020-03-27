@@ -4,7 +4,7 @@ const standardResponses = require('./standard-responses');
 
 const launch = async (trigger_id) => {
   const token = process.env.BOT_TOKEN;
-  let url = 'https://slack.com/api/dialog.open';
+  let url = process.env.DIALOG_URL;
   let data = {
     "trigger_id": trigger_id,
     "dialog": dialog()
