@@ -1,35 +1,21 @@
-const axios = require('axios');
+require('dotenv').config();
 const qs = require('qs');
-const dialog = require('./dialog_blocks/dialog');
-
-require('dotenv').config()
-const token = process.env.BOT_TOKEN;
+const unrecognized = require('./handlers/unrecognized');
+const dialogLauncher = require('./handlers/dialog_launcher');
+const dataCollector = require('./handlers/data_collector');
 
 exports.lambdaHandler = async (event, context) => {
   let body = qs.parse(event.body);
-  let trigger_id = body.trigger_id;
 
-
-  let url = 'https://slack.com/api/dialog.open';
-  let data = {
-    "trigger_id": trigger_id,
-    "dialog": dialog()
-  };
-
-  const options = {
-    method: 'post',
-    url: url,
-    data: data,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    }
+  let payload = JSON.parse(body.payload || '{}');
+  if (payload.type === 'dialog_submission') {
+    return await dataCollector.collect(payload);
   }
 
-  await axios(options);
+  let trigger_id = body.trigger_id
+  if (trigger_id) {
+    return await dialogLauncher.launch(trigger_id);
+  }
 
-  return {
-    statusCode: 200,
-    body: ''
-  };
+  return unrecognized;
 };
