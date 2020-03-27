@@ -6,6 +6,7 @@ const dialogLauncher = require('./handlers/dialog_launcher');
 const dataCollector = require('./handlers/data_collector');
 
 exports.lambdaHandler = async (event, context) => {
+  // Initiate a new deployment
   let body = qs.parse(event.body);
 
   let payload = JSON.parse(body.payload || '{}');

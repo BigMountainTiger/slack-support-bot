@@ -1,5 +1,6 @@
 //const axios = require('axios');
 const standardResponses = require('./standard-responses');
+const sqs = require('./sqs_queue');
 
 const validate = (submission) => {
   let txt_duedate = submission.txt_duedate;
@@ -31,6 +32,7 @@ const collect = async (payload) => {
   let validationErrors = validate(submission);
   if (validationErrors) { return validationErrors; }
 
+  await sqs.send(payload);
   return standardResponses.EMPTY;
 }
 
