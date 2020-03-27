@@ -1,6 +1,7 @@
 require('dotenv').config();
+
 const qs = require('qs');
-const unrecognized = require('./handlers/unrecognized');
+const standardResponses = require('./handlers/standard-responses');
 const dialogLauncher = require('./handlers/dialog_launcher');
 const dataCollector = require('./handlers/data_collector');
 
@@ -17,5 +18,5 @@ exports.lambdaHandler = async (event, context) => {
     return await dialogLauncher.launch(trigger_id);
   }
 
-  return unrecognized;
+  return standardResponses.UNSUPPORTED;
 };

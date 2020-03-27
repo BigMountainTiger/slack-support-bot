@@ -1,5 +1,6 @@
 const axios = require('axios');
 const dialog = require('../dialog_blocks/dialog');
+const standardResponses = require('./standard-responses');
 
 const launch = async (trigger_id) => {
   const token = process.env.BOT_TOKEN;
@@ -20,13 +21,7 @@ const launch = async (trigger_id) => {
   }
 
   await axios(options);
-
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json'
-    }, body: ''
-  };
+  return standardResponses.EMPTY;
 }
 
 exports.launch = launch;

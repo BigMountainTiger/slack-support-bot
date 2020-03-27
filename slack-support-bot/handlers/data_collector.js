@@ -1,4 +1,5 @@
 //const axios = require('axios');
+const standardResponses = require('./standard-responses');
 
 const validate = (submission) => {
   let txt_duedate = submission.txt_duedate;
@@ -20,35 +21,17 @@ const validate = (submission) => {
     }
   }
 
-  if (errors.length === 0) {
-    return null;
-  }
-
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      errors: errors
-    })
-  };
+  if (errors.length === 0) { return null; }
+  return standardResponses.SUCCESSRESPONSE({ errors: errors });
 };
 
 const collect = async (payload) => {
   let submission = payload.submission;
 
-  let validationErrorResponse = validate(submission);
-  if (validationErrorResponse) {
-    return validationErrorResponse;
-  }
+  let validationErrors = validate(submission);
+  if (validationErrors) { return validationErrors; }
 
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json'
-    }, body: ''
-  };
+  return standardResponses.EMPTY;
 }
 
 exports.collect = collect;
