@@ -12,6 +12,14 @@ let getDialog = () => {
     "state": "Limo",
     "elements": [
       {
+        "type": "text",
+        "label": "ISSUE SUMMARY",
+        "name": "txt_summary",
+        "placeholder": "Please give a summary of the issue",
+        "min_length": 20,
+        "optional": false
+      },
+      {
         "type": "textarea",
         "label": "ISSUE DESCRIPTION",
         "name": "txt_description",

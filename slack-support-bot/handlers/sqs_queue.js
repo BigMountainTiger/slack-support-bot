@@ -2,12 +2,13 @@ const AWS = require('aws-sdk');
 AWS.config.update({region: process.env.SUPPORT_QUEUE_REGION});
 
 const getData = (payload) => {
-
+  
   let sb = payload.submission;
   let data = {
-    user: payload.user.name,
+    user: payload.user,
     time: Date.now(),
     request: {
+      summary: sb.txt_summary,
       description: sb.txt_description,
       affected_application: sb.sel_affected_application,
       priority: sb.sel_priority,
