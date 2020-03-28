@@ -12,6 +12,7 @@ Resources:
   SlackSupportBotFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: SlackSupportBotFunction
       CodeUri: slack-support-bot/
       Handler: app.lambdaHandler
       Runtime: nodejs12.x

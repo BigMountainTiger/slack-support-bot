@@ -2,7 +2,7 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "sam-app"
+stack_name = "slack-bot-app"
 s3_bucket = "sam.huge.head.li"
 s3_prefix = "slack-bot-app"
 region = "us-east-1"

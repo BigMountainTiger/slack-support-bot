@@ -73,3 +73,9 @@ The SAM CLI
 aws s3 rm s3://sam.huge.head.li --recursive
 sam package --s3-bucket sam.huge.head.li
 sam deploy
+
+Role created
+sam-app-SlackSupportBotFunctionRole-1R8HA4OXJ2PFT
+
+
+DELETE cloudFormation stack - aws cloudformation delete-stack --stack-name myteststack
