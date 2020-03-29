@@ -16,7 +16,7 @@ let getDialog = () => {
         "label": "ISSUE SUMMARY",
         "name": "txt_summary",
         "placeholder": "Please give a summary of the issue",
-        "min_length": 20,
+        "min_length": 10,
         "optional": false
       },
       {
