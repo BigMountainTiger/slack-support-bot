@@ -4,6 +4,7 @@ const qs = require('qs');
 const standardResponses = require('./handlers/standard-responses');
 const dialogLauncher = require('./handlers/dialog_launcher');
 const dataCollector = require('./handlers/data_collector');
+const sqs = require('./handlers/sqs_queue');
 
 const eventTypes = {
   events: 'events',
@@ -35,7 +36,7 @@ exports.lambdaHandler = async (event, context) => {
       };
     }
 
-    console.log(body);
+    await sqs.sendAttachmentData(body.event);
     return standardResponses.EMPTY;
   }
 
