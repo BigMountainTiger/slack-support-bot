@@ -34,6 +34,6 @@ const collect = async (payload) => {
 
   await sqs.send(payload);
   return standardResponses.EMPTY;
-}
+};
 
 exports.collect = collect;
