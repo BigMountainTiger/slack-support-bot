@@ -45,7 +45,7 @@ exports.lambdaHandler = async (event, context) => {
       return await dataCollector.collect(payload);
     }
 
-    let trigger_id = body.trigger_id
+    let trigger_id = body.trigger_id;
     if (trigger_id) {
       return await dialogLauncher.launch(trigger_id);
     }
