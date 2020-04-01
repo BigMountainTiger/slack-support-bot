@@ -6,9 +6,20 @@ const dialogLauncher = require('./handlers/dialog_launcher');
 const dataCollector = require('./handlers/data_collector');
 
 exports.lambdaHandler = async (event, context) => {
-  // Initiate a new deployment
-  let body = qs.parse(event.body);
+  console.log('message - im');
+  console.log(event.body);
+  let body = JSON.parse(event.body || '{}');
+  // message.im
+  response = {
+    'statusCode': 200,
+    'body': JSON.stringify({
+        message: body
+    })
+  };
 
+  return response;
+
+  //let body = qs.parse(event.body);
   let payload = JSON.parse(body.payload || '{}');
   if (payload.type === 'dialog_submission') {
     return await dataCollector.collect(payload);
