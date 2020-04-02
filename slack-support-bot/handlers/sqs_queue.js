@@ -21,27 +21,6 @@ const getDialogData = (payload) => {
   return data;
 };
 
-const sendDialogData = async (payload) => {
-  let sqs = new AWS.SQS({apiVersion: '2012-11-05'});
-
-  let params = {
-    DelaySeconds: 0,
-    MessageAttributes: {
-      "Type": { DataType: "String", StringValue: "TECH_SUPPORT_REQUEST" }
-    },
-    MessageBody: JSON.stringify(getDialogData(payload)),
-    QueueUrl: process.env.SUPPORT_QUEUE_URL
-  };
-
-  let request = new Promise((resolve, reject) => {
-    sqs.sendMessage(params, (err, data) => {
-      if (err) { reject(err); } else { resolve(data.MessageId) }
-    });
-  });
-
-  await request;
-};
-
 const getAttachmentData = (e) => {
   const files = [];
   for (let i = 0; i < e.files.length; i++) {
@@ -64,7 +43,7 @@ const getAttachmentData = (e) => {
   return data;
 };
 
-const sendAttachmentData = async (event) => {
+const sendData = async (data) => {
   let sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 
   let params = {
@@ -72,7 +51,7 @@ const sendAttachmentData = async (event) => {
     MessageAttributes: {
       "Type": { DataType: "String", StringValue: "TECH_SUPPORT_REQUEST" }
     },
-    MessageBody: JSON.stringify(getAttachmentData(event)),
+    MessageBody: JSON.stringify(data),
     QueueUrl: process.env.SUPPORT_QUEUE_URL
   };
 
@@ -83,6 +62,14 @@ const sendAttachmentData = async (event) => {
   });
 
   await request;
+};
+
+const sendDialogData = async (payload) => {
+  await sendData(getDialogData(payload));
+};
+
+const sendAttachmentData = async (event) => {
+  await sendData(getAttachmentData(event));
 };
 
 exports.sendDialogData = sendDialogData;
