@@ -35,7 +35,7 @@ const getAttachmentData = (e) => {
 
   let data = {
     type: 'ATTACHMENT',
-    user: e.user,
+    user: { id: e.user },
     jiraId: e.text,
     files: files
   };
