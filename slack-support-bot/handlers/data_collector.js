@@ -32,7 +32,7 @@ const collect = async (payload) => {
   let validationErrors = validate(submission);
   if (validationErrors) { return validationErrors; }
 
-  await sqs.send(payload);
+  await sqs.sendDialogData(payload);
   return standardResponses.EMPTY;
 };
 

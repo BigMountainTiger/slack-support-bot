@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 AWS.config.update({region: process.env.SUPPORT_QUEUE_REGION});
 
-const getData = (payload) => {
+const getDialogData = (payload) => {
   
   let sb = payload.submission;
   let data = {
@@ -21,7 +21,7 @@ const getData = (payload) => {
   return data;
 };
 
-const send = async (payload) => {
+const sendDialogData = async (payload) => {
   let sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 
   let params = {
@@ -29,7 +29,7 @@ const send = async (payload) => {
     MessageAttributes: {
       "Type": { DataType: "String", StringValue: "TECH_SUPPORT_REQUEST" }
     },
-    MessageBody: JSON.stringify(getData(payload)),
+    MessageBody: JSON.stringify(getDialogData(payload)),
     QueueUrl: process.env.SUPPORT_QUEUE_URL
   };
 
@@ -85,5 +85,5 @@ const sendAttachmentData = async (event) => {
   await request;
 };
 
-exports.send = send;
+exports.sendDialogData = sendDialogData;
 exports.sendAttachmentData = sendAttachmentData;
