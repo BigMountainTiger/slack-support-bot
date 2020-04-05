@@ -5,6 +5,7 @@ const standardResponses = require('./handlers/standard-responses');
 const dialogLauncher = require('./handlers/dialog_launcher');
 const dataCollector = require('./handlers/data_collector');
 const sqs = require('./handlers/sqs_queue');
+const BOT_USER_ID = process.env.BOT_USER_ID;
 
 const eventTypes = {
   events: 'events',
@@ -27,13 +28,6 @@ const parseBody = event => {
 };
 
 exports.lambdaHandler = async (event, context) => {
-  console.log("\n\n\n\n\n\n\n\n\n\n...........................");
-
-  // Need to ignore message sent by bot
-  console.log(event.body);
-
-  console.log("\n\n\n\n\n\n\n\n\n\n...........................");
-
   let body = parseBody(event);
 
   if (body.eventTypes === eventTypes.events) {
@@ -43,7 +37,13 @@ exports.lambdaHandler = async (event, context) => {
       };
     }
 
-    await sqs.sendAttachmentData(body.event);
+    const eventData = body.event;
+    if (eventData) {
+      if (eventData.user !== BOT_USER_ID) {
+        await sqs.sendAttachmentData(eventData);
+      }
+    }
+
     return standardResponses.EMPTY;
   }
 
