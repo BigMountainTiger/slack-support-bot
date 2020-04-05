@@ -4,7 +4,7 @@ const standardResponses = require('./standard-responses');
 
 const launch = async (trigger_id) => {
   const token = process.env.BOT_TOKEN;
-  let url = process.env.DIALOG_URL;
+  let url = process.env.SLACK_DIALOG_URL;
   let data = {
     "trigger_id": trigger_id,
     "dialog": dialog()
