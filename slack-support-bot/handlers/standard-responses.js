@@ -2,7 +2,7 @@ const UNSUPPORTED = {
   statusCode: 200,
   headers: {
     'Content-Type': 'application/json'
-  }, body: JSON.stringify('This command is not recognized')
+  }, body: 'UNSUPPORTED REQUEST'
 };
 
 const EMPTY = {
@@ -12,7 +12,16 @@ const EMPTY = {
   }, body: ''
 };
 
-const SUCCESSRESPONSE = (body) => {
+const INFORMATIONRESPONSE = (text) => {
+  return {
+    statusCode: 200,
+    headers: {
+      'Content-Type': 'application/json'
+    }, body: text
+  };
+};
+
+const SUCCESSOBJECTRESPONSE = (body) => {
   return {
     statusCode: 200,
     headers: {
@@ -21,6 +30,7 @@ const SUCCESSRESPONSE = (body) => {
   };
 };
 
-exports.UNSUPPORTED = UNSUPPORTED;
 exports.EMPTY = EMPTY;
-exports.SUCCESSRESPONSE = SUCCESSRESPONSE;
+exports.UNSUPPORTED = UNSUPPORTED;
+exports.INFORMATIONRESPONSE = INFORMATIONRESPONSE;
+exports.SUCCESSOBJECTRESPONSE = SUCCESSOBJECTRESPONSE;

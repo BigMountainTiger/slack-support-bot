@@ -20,8 +20,18 @@ const launch = async (trigger_id) => {
     }
   }
 
-  await axios(options);
-  return standardResponses.EMPTY;
+  let statusText = '';
+  try {
+    let res = await axios(options);
+    let d = res.data || {};
+    if (! d.ok) {
+      statusText = 'Slack refuses to open the dialog';
+    }
+  } catch (err) {
+    statusText = 'Unable to connect to the server to open the dialog';
+  }
+
+  return standardResponses.INFORMATIONRESPONSE(statusText);
 }
 
 exports.launch = launch;
