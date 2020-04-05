@@ -1,6 +1,5 @@
 const standardResponses = require('./standard-responses');
 const sqs = require('./sqs_queue');
-const slack = require('./slack-informer');
 
 const validate = (submission) => {
   let txt_duedate = submission.txt_duedate;
@@ -29,19 +28,37 @@ const validate = (submission) => {
   }
 };
 
+const getDialogData = (payload) => {
+  
+  let sb = payload.submission;
+  let data = {
+    type: 'DIALOG',
+    user: payload.user,
+    time: Date.now(),
+    request: {
+      summary: sb.txt_summary,
+      description: sb.txt_description,
+      affected_application: sb.sel_affected_application,
+      priority: sb.sel_priority,
+      duedate: sb.txt_duedate,
+      justification: sb.txt_justification
+    }
+  };
+
+  return data;
+};
+
 const collect = async (payload) => {
   let submission = payload.submission || {};
 
   let validationErrors = validate(submission);
   if (validationErrors) { return standardResponses.SUCCESSOBJECTRESPONSE(validationErrors); }
 
+  const dialogData =  getDialogData(payload);
   try {
-    await sqs.sendDialogData(payload);
+    await sqs.sendData(dialogData);
   } catch(e) {
-    await slack.inform({
-      channel: payload.user.id,
-      text: 'Unable to send the data to further add to JIRA'
-    });
+    console.log('Unable to send dialog data to the queue\n' + JSON.stringify(dialogData));
   }
   
   return standardResponses.EMPTY;

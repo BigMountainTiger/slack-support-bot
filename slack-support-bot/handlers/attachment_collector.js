@@ -23,8 +23,13 @@ const getAttachmentData = (e) => {
 };
 
 const sendAttachmentData = async (event) => {
-  const data = getAttachmentData(event);
-  await sqs.sendData(data);
+  const attachmentData = getAttachmentData(event);
+  try {
+    await sqs.sendData(attachmentData);
+  }catch(e) {
+    
+    console.log('Unable to send dialog data to the queue\n' + JSON.stringify(attachmentData));
+  }
 };
 
 exports.sendAttachmentData = sendAttachmentData;
