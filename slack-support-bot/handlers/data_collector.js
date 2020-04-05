@@ -1,4 +1,3 @@
-//const axios = require('axios');
 const standardResponses = require('./standard-responses');
 const sqs = require('./sqs_queue');
 const slack = require('./slack-informer');

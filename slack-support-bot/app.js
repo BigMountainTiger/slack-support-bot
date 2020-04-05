@@ -4,7 +4,7 @@ const qs = require('qs');
 const standardResponses = require('./handlers/standard-responses');
 const dialogLauncher = require('./handlers/dialog_launcher');
 const dataCollector = require('./handlers/data_collector');
-const sqs = require('./handlers/sqs_queue');
+const attachment = require('./handlers/attachment_collector');
 const BOT_USER_ID = process.env.BOT_USER_ID;
 
 const eventTypes = {
@@ -39,8 +39,9 @@ exports.lambdaHandler = async (event, context) => {
 
     const eventData = body.event;
     if (eventData) {
-      if (eventData.user !== BOT_USER_ID) {
-        await sqs.sendAttachmentData(eventData);
+      let files = eventData.files || [];
+      if ((eventData.user !== BOT_USER_ID) && (eventData.upload) && (files.length > 0)) {
+        await attachment.sendAttachmentData(eventData);
       }
     }
 
