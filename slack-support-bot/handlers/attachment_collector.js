@@ -24,7 +24,7 @@ const getAttachmentData = (e) => {
 
 const sendAttachmentData = async (event) => {
   const data = getAttachmentData(event);
-  await sqs.sendData(getAttachmentData(event));
+  await sqs.sendData(data);
 };
 
 exports.sendAttachmentData = sendAttachmentData;
