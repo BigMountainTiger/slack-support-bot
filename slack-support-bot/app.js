@@ -27,6 +27,13 @@ const parseBody = event => {
 };
 
 exports.lambdaHandler = async (event, context) => {
+  console.log("\n\n\n\n\n\n\n\n\n\n...........................");
+
+  // Need to ignore message sent by bot
+  console.log(event.body);
+
+  console.log("\n\n\n\n\n\n\n\n\n\n...........................");
+
   let body = parseBody(event);
 
   if (body.eventTypes === eventTypes.events) {
