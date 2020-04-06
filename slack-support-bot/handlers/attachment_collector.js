@@ -4,7 +4,7 @@ const getAttachmentData = (e) => {
   const files = [];
   for (let i = 0; i < e.files.length; i++) {
     let file = e.files[i];
-
+  
     files.push({
       name: file.name,
       url_private: file.url_private,
@@ -28,7 +28,7 @@ const sendAttachmentData = async (event) => {
     await sqs.sendData(attachmentData);
   }catch(e) {
     
-    console.log('Unable to send dialog data to the queue\n' + JSON.stringify(attachmentData));
+    console.error('Unable to send dialog data to the queue\n' + JSON.stringify(attachmentData));
   }
 };
 

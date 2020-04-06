@@ -58,7 +58,7 @@ const collect = async (payload) => {
   try {
     await sqs.sendData(dialogData);
   } catch(e) {
-    console.log('Unable to send dialog data to the queue\n' + JSON.stringify(dialogData));
+    console.error('Unable to send dialog data to the queue\n' + JSON.stringify(dialogData));
   }
   
   return standardResponses.EMPTY;
