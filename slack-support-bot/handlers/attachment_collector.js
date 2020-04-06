@@ -4,9 +4,10 @@ const getAttachmentData = (e) => {
   const files = [];
   for (let i = 0; i < e.files.length; i++) {
     let file = e.files[i];
-  
+
     files.push({
       name: file.name,
+      size: file.size,
       url_private: file.url_private,
       url_private_download: file.url_private_download
     });
