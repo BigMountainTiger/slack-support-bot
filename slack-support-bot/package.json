@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {},
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "qs": "^6.9.3"
   }
